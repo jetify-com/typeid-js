@@ -1,0 +1,39 @@
+{
+  "name": "typeid-js",
+  "version": "0.0.1",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup src --format esm,cjs --dts",
+    "clean": "rm -rf node_modules && rm -rf dist",
+    "dev": "tsup src --format esm,cjs --watch --dts",
+    "fmt": "pnpm lint --fix",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "@tsconfig/strictest": "^2.0.1",
+    "@types/node": "^20.2.5",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "uuidv7": "^0.4.4"
+  }
+}
