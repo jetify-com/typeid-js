@@ -50,7 +50,7 @@ For example, to parse an existing typeid from a string:
 ```typescript
 import { TypeID } from 'typeid-js';
 
-const tid = TypeID.fromString("prefix_00041061050r3gg28a1c60t3gf);
+const tid = TypeID.fromString("prefix_00041061050r3gg28a1c60t3gf");
 ```
 
 To encode an existing UUID as a TypeID:
