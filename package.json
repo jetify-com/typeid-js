@@ -1,6 +1,6 @@
 {
   "name": "typeid-js",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Official implementation of the TypeID specification in TypeScript. TypeIDs are type-safe, K-sortable, and globally unique identifiers inspired by Stripe IDs",
   "keywords": [
     "typeid",
