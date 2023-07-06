@@ -32,6 +32,12 @@ export default [
     "uuid": "00000000-0000-0000-0000-000000000020"
   },
   {
+    "name": "max-valid",
+    "typeid": "7zzzzzzzzzzzzzzzzzzzzzzzzz",
+    "prefix": "",
+    "uuid": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  {
     "name": "valid-alphabet",
     "typeid": "prefix_0123456789abcdefghjkmnpqrs",
     "prefix": "prefix",

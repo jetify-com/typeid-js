@@ -36,6 +36,10 @@ export class TypeID {
       throw new Error(`Invalid length. Suffix should have 26 characters, got ${suffix.length}`);
     }
 
+    if (this.suffix[0] > "7") {
+      throw new Error("Invalid suffix. First character must be in the range [0-7]");
+    }
+
     // Validate the suffix by decoding it. If it's invalid, an error will be thrown.
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const unused = decode(this.suffix);

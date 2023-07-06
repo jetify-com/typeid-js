@@ -84,5 +84,10 @@ export default [
     "name": "suffix-hyphens-crockford",
     "typeid": "prefix_123456789-0123456789-0123456",
     "description": "The suffix can't ignore hyphens as in the crockford encoding"
+  },
+  {
+    "name": "suffix-overflow",
+    "typeid": "prefix_8zzzzzzzzzzzzzzzzzzzzzzzzz",
+    "description": "The should encode at most 128-bits"
   }
 ]
