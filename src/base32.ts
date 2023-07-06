@@ -76,7 +76,8 @@ export function decode(s: string): Uint8Array {
     throw new Error("Invalid length");
   }
 
-  const v: Uint8Array = Buffer.from(s);
+  const encoder = new TextEncoder();
+  const v: Uint8Array = encoder.encode(s);
 
   // Check if all the characters are part of the expected base32 character set.
   if (
