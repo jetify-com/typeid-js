@@ -1,5 +1,4 @@
 // Data copied from the valid.yml spec file
-
 export default [
   {
     "name": "nil",

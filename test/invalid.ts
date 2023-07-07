@@ -88,6 +88,6 @@ export default [
   {
     "name": "suffix-overflow",
     "typeid": "prefix_8zzzzzzzzzzzzzzzzzzzzzzzzz",
-    "description": "The should encode at most 128-bits"
+    "description": "The suffix should encode at most 128-bits"
   }
 ]
