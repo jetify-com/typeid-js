@@ -35,7 +35,7 @@ import { typeid } from 'typeid-js';
 const tid = typeid("prefix");
 ```
 
-The prefix is optional, so if you need to create an id with a type prefix, you
+The prefix is optional, so if you need to create an id without a type prefix, you
 can do that too:
 
 ```typescript
