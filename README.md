@@ -43,20 +43,36 @@ import { typeid } from 'typeid-js';
 const tid = typeid();
 ```
 
-In addition to the `typeid()` function, there's also a `TypeID` class that can
-be used to encode/decode from other formats.
+The return type of `typeid("prefix")` is `TypeID<"prefix">`, which lets you use
+TypeScript's type checking to ensure you are passing the correct type prefix to
+functions that expect it.
+
+For example, you can create a function that only accepts TypeIDs of type `user`:
+```typescript
+import { typeid, TypeID } from 'typeid-js';
+
+function doSomethingWithUserID(id: TypeID<"user">) {
+  // ...
+}
+```
+
+In addition to the `typeid()` function, the `TypeID` class has additional methods
+to encode/decode from other formats.
 
 For example, to parse an existing typeid from a string:
 ```typescript
 import { TypeID } from 'typeid-js';
 
-const tid = TypeID.fromString("prefix_00041061050r3gg28a1c60t3gf");
+// The asType() call is optional, but it converts to type TypeID<"prefix"> instead
+// of TypeID<string>
+const tid = TypeID.fromString("prefix_00041061050r3gg28a1c60t3gf").asType("prefix");
 ```
 
 To encode an existing UUID as a TypeID:
 ```typescript
 import { TypeID } from 'typeid-js';
 
+// In this case TypeID<"prefix"> is inferred from the first argument
 const tid = TypeID.fromUUID("prefix", "00000000-0000-0000-0000-000000000000");
 ```
 

@@ -18,8 +18,8 @@ function isValidPrefix(str: string): boolean {
   return true;
 };
 
-export class TypeID {
-  constructor(private prefix: string = "", private suffix: string = "") {
+export class TypeID<const T extends string> {
+  constructor(private prefix: T, private suffix: string = "") {
     if (!isValidPrefix(prefix)) {
       throw new Error("Invalid prefix. Must be at most 63 ascii letters [a-z]");
     }
@@ -45,12 +45,20 @@ export class TypeID {
     const unused = decode(this.suffix);
   }
 
-  public getType(): string {
+  public getType(): T {
     return this.prefix;
   }
 
   public getSuffix(): string {
     return this.suffix;
+  }
+
+  public asType<const U extends string>(prefix: U): TypeID<U> {
+    const self = this as unknown as TypeID<U>;
+    if (self.prefix !== prefix) {
+      throw new Error(`Cannot convert TypeID of type ${self.prefix} to type ${prefix}`);
+    }
+    return self;
   }
 
   public toUUIDBytes(): Uint8Array {
@@ -69,29 +77,34 @@ export class TypeID {
     return `${this.prefix}_${this.suffix}`;
   }
 
-  static fromString(str: string): TypeID {
+  static fromString<const T extends string>(str: string): TypeID<T> {
     const parts = str.split("_");
     if (parts.length === 1) {
-      return new TypeID("", parts[0]);
+      return new TypeID<T>("" as T, parts[0]);
     }
     if (parts.length === 2) {
       if (parts[0] === "") {
         throw new Error(`Invalid TypeID. Prefix cannot be empty when there's a separator: ${str}`);
       }
-      return new TypeID(parts[0], parts[1]);
+      return new TypeID<T>(parts[0] as T, parts[1]);
     }
     throw new Error(`Invalid TypeID string: ${str}`);
   }
 
-  static fromUUIDBytes(prefix: string = "", bytes: Uint8Array = new Uint8Array(16)): TypeID {
+  static fromUUIDBytes<const T extends string>(prefix: T, bytes: Uint8Array): TypeID<T> {
     const suffix = encode(bytes);
     return new TypeID(prefix, suffix);
   }
 
-  static fromUUID(prefix: string = "", uuid: string = ""): TypeID {
+  static fromUUID<const T extends string>(prefix: T, uuid: string): TypeID<T> {
     const suffix = encode(parseUUID(uuid));
     return new TypeID(prefix, suffix);
   }
 }
 
-export const typeid = (prefix: string = "", suffix: string = "") => new TypeID(prefix, suffix);
+export function typeid<T extends string>(): TypeID<''>;
+export function typeid<T extends string>(prefix: T): TypeID<T>;
+export function typeid<T extends string>(prefix: T, suffix: string): TypeID<T>;
+export function typeid<T extends string>(prefix: T = "" as T, suffix: string = ""): TypeID<T> {
+  return new TypeID(prefix, suffix);
+}

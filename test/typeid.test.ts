@@ -42,6 +42,20 @@ describe('TypeID', () => {
     });
   });
 
+  describe('asType', () => {
+    it('should return the type specified by the given prefix', () => {
+      const prefix = 'prefix';
+      const tid = typeid(prefix);
+      const narrowed = tid.asType(prefix);
+      expect(tid).toEqual(narrowed);
+    });
+
+    it('should throw an error on prefix mismatch', () => {
+      const tid = typeid('foo');
+      expect(() => tid.asType('bar')).toThrow('Cannot convert TypeID of type foo to type bar');
+    });
+  });
+
   describe('toString', () => {
     it('should return a string representation', () => {
       const prefix = "test";
