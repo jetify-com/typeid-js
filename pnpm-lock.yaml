@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   uuidv7:
-    specifier: ^0.4.4
-    version: 0.4.4
+    specifier: ^0.6.2
+    version: 0.6.2
 
 devDependencies:
   '@jest/globals':
@@ -2863,8 +2863,8 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /uuidv7@0.4.4:
-    resolution: {integrity: sha512-jjRGChg03uGp9f6wQYSO8qXkweJwRbA5WRuEQE8xLIiehIzIIi23qZSzsyvZPCPoFqkeLtZuz7Plt1LGukAInA==}
+  /uuidv7@0.6.2:
+    resolution: {integrity: sha512-VLVN90rtN2KFewkXa9T6WWGCnRbk4kiQpPpuL47S0jdMr1rDzOEBq8VJDK5f2ykmjlCZEPLTMTPLHwa+aj9JZg==}
     hasBin: true
     dev: false
 

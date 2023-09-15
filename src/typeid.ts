@@ -66,7 +66,7 @@ export class TypeID<const T extends string> {
   }
 
   public toUUID(): string {
-    const uuid = new UUID(this.toUUIDBytes());
+    const uuid = UUID.ofInner(this.toUUIDBytes());
     return uuid.toString();
   }
 

@@ -49,6 +49,6 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "uuidv7": "^0.4.4"
+    "uuidv7": "^0.6.2"
   }
 }
