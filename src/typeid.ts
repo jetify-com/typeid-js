@@ -70,7 +70,7 @@ export class TypeID<const T extends string> {
     return uuid.toString();
   }
 
-  public toString(): string {
+  public toString(): `${T}_${string}` | string {
     if (this.prefix === "") {
       return this.suffix;
     }
