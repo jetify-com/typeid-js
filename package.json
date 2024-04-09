@@ -15,7 +15,7 @@
     "name": "jetpack.io",
     "email": "opensource@jetpack.io"
   },
-  "repository": "github:jetpack-io/typeid-js",
+  "repository": "github:jetify-com/typeid-js",
   "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
