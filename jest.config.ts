@@ -1,18 +1,16 @@
-import type { JestConfigWithTsJest } from 'ts-jest';
+import type { JestConfigWithTsJest } from "ts-jest";
 
 const config: JestConfigWithTsJest = {
-  roots: ['<rootDir>/test'],
+  roots: ["<rootDir>/test"],
   transform: {
-    '\\.[jt]s?$': [
-      'ts-jest',
+    "\\.[jt]s?$": [
+      "ts-jest",
       {
-        tsconfig: "./tsconfig.json"
-      }
+        tsconfig: "./tsconfig.json",
+      },
     ],
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(.pnpm|uuidv7))',
-  ],
+  transformIgnorePatterns: ["node_modules/(?!(.pnpm|uuidv7))"],
   verbose: true,
 };
 

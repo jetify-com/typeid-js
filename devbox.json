@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetpack-io/devbox/0.10.4/.schema/devbox.schema.json",
+  "packages": [
+    "nodejs@latest"
+  ],
+  "env": {
+    "DEVBOX_COREPACK_ENABLED": "true"
+  },
+  "shell": {
+    "init_hook": [
+      "pnpm install"
+    ],
+    "scripts": {
+      "build": "pnpm run build",
+      "test": "pnpm run test"
+    }
+  }
+}

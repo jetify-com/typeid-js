@@ -1,15 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "include": ["src/**/*.ts"],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
-    "lib": [
-      "ES2019"
-    ],
+    "lib": ["ES2019"],
     "composite": false,
     "declaration": true,
     "declarationMap": true,

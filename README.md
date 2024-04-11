@@ -11,6 +11,8 @@ This is the official JavaScript / TypeScript implementation of TypeID by the
 [jetify](https://www.jetify.com) team. It provides an npm package that can be used by
 any JavaScript or TypeScript project.
 
+#### **_ If you wish to use a string-based representation of typeid (instead of class-based), please follow the instructions [here](src/unboxed/README.md). _**
+
 # Installation
 
 Using npm:
