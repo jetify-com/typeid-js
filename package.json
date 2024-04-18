@@ -1,6 +1,6 @@
 {
   "name": "typeid-js",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Official implementation of the TypeID specification in TypeScript. TypeIDs are type-safe, K-sortable, and globally unique identifiers inspired by Stripe IDs",
   "keywords": [
     "typeid",
@@ -35,7 +35,7 @@
     "clean": "rm -rf node_modules && rm -rf dist",
     "dev": "tsup --format esm,cjs --watch --dts",
     "fmt": "pnpm lint --fix",
-    "lint": "prettier --write .",
+    "lint": "prettier '(src|test)/**/*.ts' --write",
     "test": "jest"
   },
   "devDependencies": {

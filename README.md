@@ -33,6 +33,8 @@ Using pnpm:
 pnpm add typeid-js
 ```
 
+Note: this package requires Typescript > 5.0.0
+
 # Usage
 
 To create a random TypeID of a given type, use the `typeid()` function:

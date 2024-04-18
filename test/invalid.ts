@@ -1,4 +1,14 @@
-// Data copied from the invalid.yml spec file
+/**
+ * This file contains test data that should be treated as *invalid* TypeIDs by
+ * conforming implementations.
+ *
+ * Each example contains an invalid TypeID string. Implementations are expected
+ * to throw an error when attempting to parse/validate these strings.
+ *
+ * Data copied over from the invalid.yml spec file
+ *
+ * Last updated: 2024-04-17 (for version 0.3.0 of the spec)
+ */
 export default [
   {
     name: "prefix-uppercase",
@@ -15,11 +25,12 @@ export default [
     typeid: "pre.fix_00000000000000000000000000",
     description: "The prefix can't have symbols, it needs to be alphabetic",
   },
-  {
-    name: "prefix-underscore",
-    typeid: "pre_fix_00000000000000000000000000",
-    description: "The prefix can't have symbols, it needs to be alphabetic",
-  },
+  // Test removed in v0.3.0 – we now allow underscores in the prefix
+  // {
+  //   name: "prefix-underscore",
+  //   typeid: "pre_fix_00000000000000000000000000",
+  //   description: "The prefix can't have symbols, it needs to be alphabetic",
+  // },
   {
     name: "prefix-non-ascii",
     typeid: "préfix_00000000000000000000000000",
@@ -95,5 +106,16 @@ export default [
     name: "suffix-overflow",
     typeid: "prefix_8zzzzzzzzzzzzzzzzzzzzzzzzz",
     description: "The suffix should encode at most 128-bits",
+  },
+  // Tests below were added in v0.3.0 when we started allowing '_' within the type prefix.
+  {
+    name: "prefix-underscore-start",
+    typeid: "_prefix_00000000000000000000000000",
+    description: "The prefix can't start with an underscore",
+  },
+  {
+    name: "prefix-underscore-end",
+    typeid: "prefix__00000000000000000000000000",
+    description: "The prefix can't end with an underscore",
   },
 ];

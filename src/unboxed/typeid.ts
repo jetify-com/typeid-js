@@ -10,7 +10,7 @@ export function typeidUnboxed<T extends string>(
   suffix: string = ""
 ): TypeId<T> {
   if (!isValidPrefix(prefix)) {
-    throw new Error("Invalid prefix. Must be at most 63 ascii letters [a-z]");
+    throw new Error("Invalid prefix. Must be at most 63 ascii letters [a-z_]");
   }
 
   let finalSuffix: string;
@@ -60,27 +60,31 @@ export function fromString<T extends string>(
   typeId: string,
   prefix?: T
 ): TypeId<T> {
-  const parts = typeId.split("_");
+  let p;
+  let s;
 
-  if (parts.length === 1) {
-    return typeidUnboxed("" as T, parts[0]);
-  } else if (parts.length === 2) {
-    if (parts[0] === "") {
+  const underscoreIndex = typeId.lastIndexOf("_");
+  if (underscoreIndex === -1) {
+    p = "" as T;
+    s = typeId;
+  } else {
+    p = typeId.substring(0, underscoreIndex) as T;
+    s = typeId.substring(underscoreIndex + 1);
+
+    if (!p) {
       throw new Error(
         `Invalid TypeId. Prefix cannot be empty when there's a separator: ${typeId}`
       );
     }
-
-    if (prefix && parts[0] !== prefix) {
-      throw new Error(
-        `Invalid TypeId. Prefix mismatch. Expected ${prefix}, got ${parts[0]}`
-      );
-    }
-
-    return typeidUnboxed(parts[0] as T, parts[1]);
-  } else {
-    throw new Error(`Invalid TypeId format: ${typeId}`);
   }
+
+  if (prefix && p !== prefix) {
+    throw new Error(
+      `Invalid TypeId. Prefix mismatch. Expected ${prefix}, got ${p}`
+    );
+  }
+
+  return typeidUnboxed(p, s);
 }
 
 /**
@@ -117,7 +121,7 @@ export function parseTypeId<T extends string>(
  * @returns {T} The prefix of the TypeId.
  */
 export function getType<T extends string>(typeId: TypeId<T>): T {
-  const underscoreIndex = typeId.indexOf("_");
+  const underscoreIndex = typeId.lastIndexOf("_");
   if (underscoreIndex === -1) {
     return "" as T;
   }
@@ -131,7 +135,7 @@ export function getType<T extends string>(typeId: TypeId<T>): T {
  * @returns {string} The suffix of the TypeId.
  */
 export function getSuffix<T extends string>(typeId: TypeId<T>): string {
-  const underscoreIndex = typeId.indexOf("_");
+  const underscoreIndex = typeId.lastIndexOf("_");
   if (underscoreIndex === -1) {
     return typeId;
   }

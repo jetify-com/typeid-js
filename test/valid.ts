@@ -1,4 +1,13 @@
-// Data copied from the valid.yml spec file
+/**
+ * Each example contains:
+ * - The TypeID in its canonical string representation.
+ * - The prefix
+ * - The decoded UUID as a hex string
+ *
+ * Data copied over from the typeid valid.yml spec file
+ *
+ * Last updated: 2024-04-17 (for version 0.3.0 of the spec)
+ */
 export default [
   {
     name: "nil",
@@ -47,5 +56,12 @@ export default [
     typeid: "prefix_01h455vb4pex5vsknk084sn02q",
     prefix: "prefix",
     uuid: "01890a5d-ac96-774b-bcce-b302099a8057",
+  },
+  {
+    // Tests below were added in v0.3.0 when we started allowing '_' within the type prefix.
+    name: "prefix-underscore",
+    typeid: "pre_fix_00000000000000000000000000",
+    prefix: "pre_fix",
+    uuid: "00000000-0000-0000-0000-000000000000",
   },
 ];

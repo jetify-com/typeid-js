@@ -28,11 +28,15 @@ describe("TypeID", () => {
     it("should throw an error if prefix is not lowercase", () => {
       expect(() => {
         typeid("TEST", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError("Invalid prefix. Must be at most 63 ascii letters [a-z]");
+      }).toThrowError(
+        "Invalid prefix. Must be at most 63 ascii letters [a-z_]"
+      );
 
       expect(() => {
         typeid("  ", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError("Invalid prefix. Must be at most 63 ascii letters [a-z]");
+      }).toThrowError(
+        "Invalid prefix. Must be at most 63 ascii letters [a-z_]"
+      );
     });
 
     it("should throw an error if suffix length is not 26", () => {
@@ -95,11 +99,13 @@ describe("TypeID", () => {
     });
 
     it("should throw an error for invalid TypeID string", () => {
-      const invalidStr = "invalid_string_with_underscore";
+      const invalidStr = "invalid_string_with_underscore0000000000000000";
 
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(new Error(`Invalid TypeId format: ${invalidStr}`));
+      }).toThrowError(
+        new Error(`Invalid suffix. First character must be in the range [0-7]`)
+      );
     });
   });
 
