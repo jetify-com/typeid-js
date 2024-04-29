@@ -1,4 +1,5 @@
 # Official TypeID-JS Package
+![License: Apache 2.0](https://img.shields.io/github/license/jetify-com/typeid) [![Built with Devbox](https://www.jetify.com/img/devbox/shield_galaxy.svg)](https://www.jetify.com/devbox)
 
 ### JavaScript implementation of [TypeIDs](https://github.com/jetify-com/typeid) using TypeScript.
 
