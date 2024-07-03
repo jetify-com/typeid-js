@@ -50,7 +50,10 @@ export class TypeID<const T extends string> {
     return `${this.prefix}_${this.suffix}`;
   }
 
-  static fromString<const T extends string>(str: string, prefix?: T): TypeID<T> {
+  static fromString<const T extends string>(
+    str: string,
+    prefix?: T
+  ): TypeID<T> {
     const typeIdRaw = fromString(str, prefix);
 
     return new TypeID<T>(getType(typeIdRaw) as T, getSuffix(typeIdRaw));

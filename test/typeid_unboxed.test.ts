@@ -84,6 +84,22 @@ describe("TypeId Functions", () => {
         new Error(`Invalid suffix. First character must be in the range [0-7]`)
       );
     });
+
+    it("should throw an error for empty TypeId string", () => {
+      const invalidStr = "";
+
+      expect(() => {
+        fromString(invalidStr);
+      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+    });
+
+    it("should throw an error for TypeId string with empty suffix", () => {
+      const invalidStr = "prefix_";
+
+      expect(() => {
+        fromString(invalidStr);
+      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+    });
   });
 
   describe("fromUUIDBytes", () => {

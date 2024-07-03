@@ -123,6 +123,18 @@ describe("TypeID", () => {
         new Error(`Invalid TypeId. Prefix mismatch. Expected wrong, got prefix`)
       );
     });
+    it("should throw an error for empty TypeId string", () => {
+      const invalidStr = "";
+      expect(() => {
+        TypeID.fromString(invalidStr);
+      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+    });
+    it("should throw an error for TypeId string with empty suffix", () => {
+      const invalidStr = "prefix_";
+      expect(() => {
+        TypeID.fromString(invalidStr);
+      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+    });
   });
 
   describe("fromUUIDBytes", () => {

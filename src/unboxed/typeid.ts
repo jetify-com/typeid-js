@@ -78,6 +78,10 @@ export function fromString<T extends string>(
     }
   }
 
+  if (!s) {
+    throw new Error(`Invalid TypeId. Suffix cannot be empty`);
+  }
+
   if (prefix && p !== prefix) {
     throw new Error(
       `Invalid TypeId. Prefix mismatch. Expected ${prefix}, got ${p}`
