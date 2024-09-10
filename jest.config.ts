@@ -10,7 +10,7 @@ const config: JestConfigWithTsJest = {
       },
     ],
   },
-  transformIgnorePatterns: ["node_modules/(?!(.pnpm|uuidv7))"],
+  transformIgnorePatterns: ["node_modules/(?!(.pnpm|uuid))"],
   verbose: true,
 };
 

@@ -1,4 +1,4 @@
-import { uuidv7obj, UUID } from "uuidv7";
+import { stringify, v7 } from "uuid";
 import { parseUUID } from "../parse_uuid";
 import { encode, decode } from "../base32";
 import { isValidPrefix } from "../prefix";
@@ -17,8 +17,9 @@ export function typeidUnboxed<T extends string>(
   if (suffix) {
     finalSuffix = suffix;
   } else {
-    const uuid = uuidv7obj();
-    finalSuffix = encode(uuid.bytes);
+    const buffer = new Uint8Array(16);
+    v7(undefined, buffer);
+    finalSuffix = encode(buffer);
   }
 
   if (finalSuffix.length !== 26) {
@@ -151,9 +152,7 @@ export function toUUIDBytes<T extends string>(typeId: TypeId<T>): Uint8Array {
 }
 
 export function toUUID<T extends string>(typeId: TypeId<T>) {
-  const uuidBytes = toUUIDBytes(typeId);
-  const uuid = UUID.ofInner(uuidBytes);
-  return uuid.toString();
+  return stringify(toUUIDBytes(typeId));
 }
 
 export function fromUUIDBytes(

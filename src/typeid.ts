@@ -1,4 +1,4 @@
-import { UUID } from "uuidv7";
+import { stringify } from "uuid";
 import { parseUUID } from "./parse_uuid";
 import { encode, decode } from "./base32";
 import {
@@ -39,8 +39,7 @@ export class TypeID<const T extends string> {
   }
 
   public toUUID(): string {
-    const uuid = UUID.ofInner(this.toUUIDBytes());
-    return uuid.toString();
+    return stringify(this.toUUIDBytes());
   }
 
   public toString(): `${T}_${string}` | string {
