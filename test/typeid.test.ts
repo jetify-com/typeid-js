@@ -3,6 +3,12 @@ import { describe, expect, it } from "@jest/globals";
 import { typeid, TypeID } from "../src/typeid";
 import validJson from "./valid";
 import invalidJson from "./invalid";
+import {
+  InvalidPrefixError,
+  InvalidSuffixCharacterError,
+  InvalidSuffixLengthError,
+  PrefixMismatchError,
+} from "../src/unboxed/error";
 
 describe("TypeID", () => {
   describe("constructor", () => {
@@ -28,15 +34,11 @@ describe("TypeID", () => {
     it("should throw an error if prefix is not lowercase", () => {
       expect(() => {
         typeid("TEST", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError(
-        "Invalid prefix. Must be at most 63 ascii letters [a-z_]"
-      );
+      }).toThrowError(new InvalidPrefixError("TEST"));
 
       expect(() => {
         typeid("  ", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError(
-        "Invalid prefix. Must be at most 63 ascii letters [a-z_]"
-      );
+      }).toThrowError(new InvalidPrefixError("  "));
     });
 
     it("should throw an error if suffix length is not 26", () => {
@@ -111,29 +113,25 @@ describe("TypeID", () => {
 
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(
-        new Error(`Invalid suffix. First character must be in the range [0-7]`)
-      );
+      }).toThrowError(new InvalidSuffixCharacterError("u"));
     });
     it("should throw an error with wrong prefix", () => {
       const str = "prefix_00041061050r3gg28a1c60t3gf";
       expect(() => {
         TypeID.fromString(str, "wrong");
-      }).toThrowError(
-        new Error(`Invalid TypeId. Prefix mismatch. Expected wrong, got prefix`)
-      );
+      }).toThrowError(new PrefixMismatchError("wrong", "prefix"));
     });
     it("should throw an error for empty TypeId string", () => {
       const invalidStr = "";
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+      }).toThrowError(new InvalidSuffixLengthError(0));
     });
     it("should throw an error for TypeId string with empty suffix", () => {
       const invalidStr = "prefix_";
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+      }).toThrowError(new InvalidSuffixLengthError(0));
     });
   });
 

@@ -12,6 +12,11 @@ import {
 } from "../src/unboxed/typeid";
 import validJson from "./valid";
 import invalidJson from "./invalid";
+import {
+  InvalidPrefixError,
+  InvalidSuffixCharacterError,
+  InvalidSuffixLengthError,
+} from "../src/unboxed/error";
 
 describe("TypeId Functions", () => {
   describe("typeidUnboxed", () => {
@@ -38,15 +43,11 @@ describe("TypeId Functions", () => {
     it("should throw an error if prefix is not lowercase", () => {
       expect(() => {
         typeidUnboxed("TEST", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError(
-        "Invalid prefix. Must be at most 63 ascii letters [a-z_]"
-      );
+      }).toThrowError(new InvalidPrefixError("TEST"));
 
       expect(() => {
         typeidUnboxed("  ", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError(
-        "Invalid prefix. Must be at most 63 ascii letters [a-z_]"
-      );
+      }).toThrowError(new InvalidPrefixError("  "));
     });
 
     it("should throw an error if suffix length is not 26", () => {
@@ -80,9 +81,7 @@ describe("TypeId Functions", () => {
 
       expect(() => {
         fromString(invalidStr);
-      }).toThrowError(
-        new Error(`Invalid suffix. First character must be in the range [0-7]`)
-      );
+      }).toThrowError(new InvalidSuffixCharacterError("u"));
     });
 
     it("should throw an error for empty TypeId string", () => {
@@ -90,7 +89,7 @@ describe("TypeId Functions", () => {
 
       expect(() => {
         fromString(invalidStr);
-      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+      }).toThrowError(new InvalidSuffixLengthError(0));
     });
 
     it("should throw an error for TypeId string with empty suffix", () => {
@@ -98,7 +97,7 @@ describe("TypeId Functions", () => {
 
       expect(() => {
         fromString(invalidStr);
-      }).toThrowError(new Error(`Invalid TypeId. Suffix cannot be empty`));
+      }).toThrowError(new InvalidSuffixLengthError(0));
     });
   });
 

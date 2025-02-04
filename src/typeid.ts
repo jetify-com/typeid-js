@@ -7,6 +7,7 @@ import {
   getType,
   fromString,
 } from "./unboxed/typeid";
+import { TypeIDConversionError } from "./unboxed/error";
 
 export class TypeID<const T extends string> {
   constructor(private prefix: T, private suffix: string = "") {
@@ -27,9 +28,7 @@ export class TypeID<const T extends string> {
   public asType<const U extends string>(prefix: U): TypeID<U> {
     const self = this as unknown as TypeID<U>;
     if (self.prefix !== prefix) {
-      throw new Error(
-        `Cannot convert TypeID of type ${self.prefix} to type ${prefix}`
-      );
+      throw new TypeIDConversionError(self.prefix, prefix);
     }
     return self;
   }

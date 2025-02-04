@@ -2,6 +2,13 @@ import { stringify, v7 } from "uuid";
 import { parseUUID } from "../parse_uuid";
 import { encode, decode } from "../base32";
 import { isValidPrefix } from "../prefix";
+import {
+  EmptyPrefixError,
+  InvalidPrefixError,
+  InvalidSuffixCharacterError,
+  InvalidSuffixLengthError,
+  PrefixMismatchError,
+} from "./error";
 
 export type TypeId<T> = string & { __type: T };
 
@@ -10,7 +17,7 @@ export function typeidUnboxed<T extends string>(
   suffix: string = ""
 ): TypeId<T> {
   if (!isValidPrefix(prefix)) {
-    throw new Error("Invalid prefix. Must be at most 63 ascii letters [a-z_]");
+    throw new InvalidPrefixError(prefix);
   }
 
   let finalSuffix: string;
@@ -23,15 +30,11 @@ export function typeidUnboxed<T extends string>(
   }
 
   if (finalSuffix.length !== 26) {
-    throw new Error(
-      `Invalid length. Suffix should have 26 characters, got ${finalSuffix.length}`
-    );
+    throw new InvalidSuffixLengthError(finalSuffix.length);
   }
 
   if (finalSuffix[0] > "7") {
-    throw new Error(
-      "Invalid suffix. First character must be in the range [0-7]"
-    );
+    throw new InvalidSuffixCharacterError(finalSuffix[0]);
   }
 
   // Validate the suffix by decoding it. If it's invalid, an error will be thrown.
@@ -73,20 +76,16 @@ export function fromString<T extends string>(
     s = typeId.substring(underscoreIndex + 1);
 
     if (!p) {
-      throw new Error(
-        `Invalid TypeId. Prefix cannot be empty when there's a separator: ${typeId}`
-      );
+      throw new EmptyPrefixError(typeId);
     }
   }
 
   if (!s) {
-    throw new Error(`Invalid TypeId. Suffix cannot be empty`);
+    throw new InvalidSuffixLengthError(0);
   }
 
   if (prefix && p !== prefix) {
-    throw new Error(
-      `Invalid TypeId. Prefix mismatch. Expected ${prefix}, got ${p}`
-    );
+    throw new PrefixMismatchError(prefix, p);
   }
 
   return typeidUnboxed(p, s);
