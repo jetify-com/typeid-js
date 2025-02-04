@@ -41,11 +41,11 @@ export class TypeID<const T extends string> {
     return stringify(this.toUUIDBytes());
   }
 
-  public toString(): `${T}_${string}` | string {
+  public toString(): T extends "" ? string : `${T}_${string}` {
     if (this.prefix === "") {
-      return this.suffix;
+      return this.suffix as T extends "" ? string : `${T}_${string}`;
     }
-    return `${this.prefix}_${this.suffix}`;
+    return `${this.prefix}_${this.suffix}` as T extends "" ? string : `${T}_${string}`;
   }
 
   static fromString<const T extends string>(
