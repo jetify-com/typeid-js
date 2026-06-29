@@ -1,6 +1,6 @@
 {
   "name": "typeid-js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Official implementation of the TypeID specification in TypeScript. TypeIDs are type-safe, K-sortable, and globally unique identifiers inspired by Stripe IDs",
   "keywords": [
     "typeid",
@@ -42,7 +42,6 @@
     "@jest/globals": "^29.7.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/node": "^20.19.30",
-    "@types/uuid": "^10.0.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
@@ -50,6 +49,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "uuid": "^10.0.0"
+    "uuid": "^11.1.1"
   }
 }
