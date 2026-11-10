@@ -34,17 +34,17 @@ describe("TypeID", () => {
     it("should throw an error if prefix is not lowercase", () => {
       expect(() => {
         typeid("TEST", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError(new InvalidPrefixError("TEST"));
+      }).toThrow(new InvalidPrefixError("TEST"));
 
       expect(() => {
         typeid("  ", "00041061050r3gg28a1c60t3gf");
-      }).toThrowError(new InvalidPrefixError("  "));
+      }).toThrow(new InvalidPrefixError("  "));
     });
 
     it("should throw an error if suffix length is not 26", () => {
       expect(() => {
         typeid("test", "abc");
-      }).toThrowError(
+      }).toThrow(
         "Invalid length. Suffix should have 26 characters, got 3"
       );
     });
@@ -113,25 +113,25 @@ describe("TypeID", () => {
 
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(new InvalidSuffixCharacterError("u"));
+      }).toThrow(new InvalidSuffixCharacterError("u"));
     });
     it("should throw an error with wrong prefix", () => {
       const str = "prefix_00041061050r3gg28a1c60t3gf";
       expect(() => {
         TypeID.fromString(str, "wrong");
-      }).toThrowError(new PrefixMismatchError("wrong", "prefix"));
+      }).toThrow(new PrefixMismatchError("wrong", "prefix"));
     });
     it("should throw an error for empty TypeId string", () => {
       const invalidStr = "";
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(new InvalidSuffixLengthError(0));
+      }).toThrow(new InvalidSuffixLengthError(0));
     });
     it("should throw an error for TypeId string with empty suffix", () => {
       const invalidStr = "prefix_";
       expect(() => {
         TypeID.fromString(invalidStr);
-      }).toThrowError(new InvalidSuffixLengthError(0));
+      }).toThrow(new InvalidSuffixLengthError(0));
     });
   });
 
@@ -224,7 +224,7 @@ describe("TypeID", () => {
       it(`errors on invalid case: ${testcase.name}`, () => {
         expect(() => {
           TypeID.fromString(testcase.typeid);
-        }).toThrowError();
+        }).toThrow();
       });
     });
   });
