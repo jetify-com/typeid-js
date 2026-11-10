@@ -36,17 +36,14 @@
     "dev": "tsup --format esm,cjs --watch --dts",
     "fmt": "pnpm lint --fix",
     "lint": "prettier '(src|test)/**/*.ts' --write",
-    "test": "jest"
+    "test": "vitest run"
   },
   "devDependencies": {
-    "@jest/globals": "^30.5.2",
     "@tsconfig/strictest": "^2.0.8",
     "@types/node": "^26.6.6",
-    "jest": "^30.5.2",
-    "ts-jest": "^29.4.15",
-    "ts-node": "^10.9.2",
     "tsup": "^9.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "uuid": "^14.0.3"
